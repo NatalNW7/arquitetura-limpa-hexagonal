@@ -34,5 +34,5 @@ test("Deve registar um usuario com senha criptografada", () => {
 
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Natal");
-  expect(cript.comparar("1234", usuario.senha)).toBeTruthy();
+  expect(cript.comparar("1234", usuario.senha!)).toBeTruthy();
 });
