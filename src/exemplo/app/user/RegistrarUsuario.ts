@@ -1,3 +1,4 @@
+import Id from "../shared/Id";
 import ColecaoUsuario from "./ColecaoUsuario";
 import ProvedorCriptografia from "./ProvedorCriptografia";
 import Usuario from "./Usuario";
@@ -12,7 +13,7 @@ export default class RegistrarUsuario {
     const senhaCripto = this.cript.criptografar(senha);
 
     const usuario: Usuario = {
-      id: Math.random(),
+      id: Id.gerar(),
       nome,
       email,
       senha: senhaCripto,

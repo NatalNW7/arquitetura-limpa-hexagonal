@@ -1,11 +1,13 @@
 const dotenv = require("dotenv");
+const path = require("path");
 dotenv.config({ path: ".env" });
 
 module.exports = {
   client: "sqlite3",
   connection: {
-    filename: "./mydb.sqlite",
+    filename: path.resolve(__dirname, "../mydb.sqlite"),
   },
+  useNullAsDefault: true,
 };
 
 //  para usar com postgress
