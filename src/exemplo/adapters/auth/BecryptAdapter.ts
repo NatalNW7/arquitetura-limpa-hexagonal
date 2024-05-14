@@ -1,4 +1,4 @@
-import ProvedorCriptografia from "../../app/ports/ProvedorCriptografia";
+import ProvedorCriptografia from "../../app/user/ProvedorCriptografia";
 import bcrypt from "bcrypt";
 
 export default class BecryptAdapter implements ProvedorCriptografia {

@@ -1,4 +1,4 @@
-import ProvedorCriptografia from "../../app/ports/ProvedorCriptografia";
+import ProvedorCriptografia from "../../app/user/ProvedorCriptografia";
 export default class SenhaComEspoco implements ProvedorCriptografia {
   criptografar(senha: string): string {
     return senha.split("").join(" ");
