@@ -5,7 +5,14 @@ dotenv.config({ path: ".env" });
 module.exports = {
   client: "sqlite3",
   connection: {
-    filename: path.resolve(__dirname, "../mydb.sqlite"),
+    filename: path.resolve(__dirname, "mydb.sqlite"),
+  },
+  pool: {
+    min: 2,
+    max: 10,
+  },
+  migrations: {
+    tableName: "knex_migrations",
   },
   useNullAsDefault: true,
 };

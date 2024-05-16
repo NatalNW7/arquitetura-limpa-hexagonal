@@ -1,9 +1,9 @@
-import UsuarioEmMemoria from "../src/adapters/db/UsuarioEmMemoria";
-import RegistrarUsuario from "../src/core/user/RegistrarUsuario";
-import InverterSenha from "../src/adapters/auth/InverterSenha";
-import SenhaComEspaco from "../src/adapters/auth/SenhaComEspaco";
-import BecryptAdapter from "../src/adapters/auth/BecryptAdapter";
-import ColecaousuarioDB from "../src/adapters/db/knex/ColecaoUsuarioDB";
+import UsuarioEmMemoria from "../../src/adapters/db/UsuarioEmMemoria";
+import RegistrarUsuario from "../../src/core/user/RegistrarUsuario";
+import InverterSenha from "../../src/adapters/auth/InverterSenha";
+import SenhaComEspaco from "../../src/adapters/auth/SenhaComEspaco";
+import BecryptAdapter from "../../src/adapters/auth/BecryptAdapter";
+import ColecaousuarioDB from "../../src/adapters/db/knex/ColecaoUsuarioDB";
 
 test("Deve registar um usuario com senha invertida", async () => {
   const colecao = new UsuarioEmMemoria();
