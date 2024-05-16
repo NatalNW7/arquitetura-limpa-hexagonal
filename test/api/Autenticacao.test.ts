@@ -20,3 +20,13 @@ test("Deve resgistrar um novo usuario se não existir, caso contrario deve retor
     expect(err.response.data).toBe("Usuario já existe!");
   }
 });
+
+test("Deve logar com email e senha corretos", async () => {
+  const usuario: Partial<Usuario> = {
+    email: "lary@lary.com",
+    senha: "1234",
+  };
+
+  const res = await axios.post(`${baseUrl}/login`, usuario);
+  expect(res.status).toBe(200);
+});
