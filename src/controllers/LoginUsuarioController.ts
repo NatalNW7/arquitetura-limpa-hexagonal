@@ -11,6 +11,7 @@ export default class RegistrarUsuarioController {
         });
         res.status(200).json(resposta);
       } catch (err: any) {
+        console.log(err.message);
         res.status(403).send(err.message);
       }
     });

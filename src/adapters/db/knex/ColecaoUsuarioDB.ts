@@ -11,4 +11,8 @@ export default class ColecaoUsuarioDB implements ColecaoUsuario {
   async buscarPorEmail(email: string): Promise<Usuario | null> {
     return conexao.table("usuario").where("email", email).first();
   }
+
+  async buscarUsuarios(): Promise<Usuario[]> {
+    return conexao.select("id, nome, email").table("usuario");
+  }
 }

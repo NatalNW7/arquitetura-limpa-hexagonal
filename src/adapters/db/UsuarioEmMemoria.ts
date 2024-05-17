@@ -12,4 +12,8 @@ export default class UsuarioEmMemoria implements ColecaoUsuario {
 
     return usuario ?? null;
   }
+
+  async buscarUsuarios(): Promise<Usuario[]> {
+    return this.usuarios;
+  }
 }

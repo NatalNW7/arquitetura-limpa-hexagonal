@@ -29,4 +29,6 @@ test("Deve logar com email e senha corretos", async () => {
 
   const res = await axios.post(`${baseUrl}/login`, usuario);
   expect(res.status).toBe(200);
+  expect(res.data).toHaveProperty("token");
+  console.log(res.data);
 });
