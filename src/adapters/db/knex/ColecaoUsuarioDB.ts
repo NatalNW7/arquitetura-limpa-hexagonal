@@ -13,6 +13,6 @@ export default class ColecaoUsuarioDB implements ColecaoUsuario {
   }
 
   async buscarUsuarios(): Promise<Usuario[]> {
-    return conexao.select("id, nome, email").table("usuario");
+    return conexao.select("id", "nome", "email").table("usuario");
   }
 }

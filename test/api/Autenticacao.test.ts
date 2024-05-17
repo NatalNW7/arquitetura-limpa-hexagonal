@@ -21,7 +21,7 @@ test("Deve resgistrar um novo usuario se não existir, caso contrario deve retor
   }
 });
 
-test("Deve logar com email e senha corretos", async () => {
+test("Deve logar com email e senha corretos e token", async () => {
   const usuario: Partial<Usuario> = {
     email: "lary@lary.com",
     senha: "1234",
