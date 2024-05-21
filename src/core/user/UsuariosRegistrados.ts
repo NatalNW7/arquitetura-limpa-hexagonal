@@ -4,7 +4,7 @@ import Usuario from "./Usuario";
 
 export default class implements CasoDeUso<void, Usuario[]> {
   constructor(private colecao: ColecaoUsuario) {}
-  async executar(dto: void): Promise<Usuario[]> {
+  async executar(): Promise<Usuario[]> {
     return this.colecao.buscarUsuarios();
   }
 }
