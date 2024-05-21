@@ -8,6 +8,9 @@ import LoginUsuario from "./core/user/LoginUsuario";
 import JwtAdapter from "./adapters/auth/JwtAdapter";
 import UsuariosRegistrados from "./core/user/UsuariosRegistrados";
 import UsuariosRegistradosController from "./controllers/UsuariosRegistradosController";
+import SalvarTransacao from "./core/transacao/SalvarTransacao";
+import SalvarTransacaoController from "./controllers/SalvarTransacaoController";
+import UsuarioMiddlware from "./controllers/UsuarioMiddlware";
 
 const app = express();
 app.use(express.json());
@@ -27,5 +30,11 @@ new RegistrarUsuarioController(app, registrarUsuario);
 const loginUsuario = new LoginUsuario(colecao, provedorCripto, provedorToken);
 new LoginUsuarioController(app, loginUsuario);
 
+// ------------------- Rotas Autenticadas ------------------------
+const usuarioMiddleware = UsuarioMiddlware(colecao, provedorToken);
+
 const usuariosRegistrados = new UsuariosRegistrados(colecao);
-new UsuariosRegistradosController(app, usuariosRegistrados);
+new UsuariosRegistradosController(app, usuariosRegistrados, usuarioMiddleware);
+
+const salvarTransacao = new SalvarTransacao();
+new SalvarTransacaoController(app, salvarTransacao, usuarioMiddleware);

@@ -1,5 +1,6 @@
 import axios from "axios";
 import Usuario from "../../src/core/user/Usuario";
+import { getAuthorizationHeader } from "../utils/auth";
 
 const baseUrl = process.env.API_URL;
 
@@ -31,4 +32,10 @@ test("Deve logar com email e senha corretos e token", async () => {
   expect(res.status).toBe(200);
   expect(res.data).toHaveProperty("token");
   console.log(res.data);
+});
+
+test("Deve retornar todos os usuarios da base de dados", async () => {
+  const headers = await getAuthorizationHeader();
+  const res = await axios.get(`${baseUrl}/usuarios`, headers);
+  expect(res.status).toBe(200);
 });

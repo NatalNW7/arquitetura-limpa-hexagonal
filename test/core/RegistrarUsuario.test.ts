@@ -4,12 +4,13 @@ import InverterSenha from "../../src/adapters/auth/InverterSenha";
 import SenhaComEspaco from "../../src/adapters/auth/SenhaComEspaco";
 import BecryptAdapter from "../../src/adapters/auth/BecryptAdapter";
 import ColecaousuarioDB from "../../src/adapters/db/knex/ColecaoUsuarioDB";
+import usuarios from "../data/usuarios";
 
 test("Deve registar um usuario com senha invertida", async () => {
   const colecao = new UsuarioEmMemoria();
   const cript = new InverterSenha();
   const casoDeUso = new RegistrarUsuario(colecao, cript);
-  const usuario = await casoDeUso.executar("Natal", "natal@natal.com", "1234");
+  const usuario = await casoDeUso.executar(usuarios.usuarioTeste);
 
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Natal");
@@ -20,7 +21,7 @@ test("Deve registar um usuario com senha com espoço", async () => {
   const colecao = new UsuarioEmMemoria();
   const cript = new SenhaComEspaco();
   const casoDeUso = new RegistrarUsuario(colecao, cript);
-  const usuario = await casoDeUso.executar("Natal", "natal@natal.com", "1234");
+  const usuario = await casoDeUso.executar(usuarios.usuarioTeste);
 
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Natal");
@@ -31,7 +32,7 @@ test("Deve registar um usuario com senha criptografada", async () => {
   const colecao = new UsuarioEmMemoria();
   const cript = new BecryptAdapter();
   const casoDeUso = new RegistrarUsuario(colecao, cript);
-  const usuario = await casoDeUso.executar("Natal", "natal@natal.com", "1234");
+  const usuario = await casoDeUso.executar(usuarios.usuarioTeste);
 
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Natal");
@@ -42,12 +43,9 @@ test("Deve lançar erro ao tentar cadastrar um usuario duas vezes", async () => 
   const colecao = new UsuarioEmMemoria();
   const cript = new BecryptAdapter();
   const casoDeUso = new RegistrarUsuario(colecao, cript);
-  const nome = "Natal";
-  const email = "natal@natal.com";
-  const senha = "1234";
 
-  await casoDeUso.executar(nome, email, senha);
-  const execucao = async () => await casoDeUso.executar(nome, email, senha);
+  await casoDeUso.executar(usuarios.usuarioTeste);
+  const execucao = async () => await casoDeUso.executar(usuarios.usuarioTeste);
 
   expect(execucao).rejects.toThrow("Usuario já existe!");
 });
@@ -56,7 +54,7 @@ test.skip("Deve registar um usuario no banco real", async () => {
   const colecao = new ColecaousuarioDB();
   const cript = new BecryptAdapter();
   const casoDeUso = new RegistrarUsuario(colecao, cript);
-  const usuario = await casoDeUso.executar("Natal", "natal@natal.com", "1234");
+  const usuario = await casoDeUso.executar(usuarios.usuarioTeste);
 
   expect(usuario).toHaveProperty("id");
   expect(usuario.nome).toBe("Natal");
