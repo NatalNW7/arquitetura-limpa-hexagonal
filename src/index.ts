@@ -11,6 +11,7 @@ import UsuariosRegistradosController from "./controllers/UsuariosRegistradosCont
 import SalvarTransacao from "./core/transacao/SalvarTransacao";
 import SalvarTransacaoController from "./controllers/SalvarTransacaoController";
 import UsuarioMiddlware from "./controllers/UsuarioMiddlware";
+import ColecaoTransacaoDB from "./adapters/db/knex/ColecaoTransacaoDB";
 
 const app = express();
 app.use(express.json());
@@ -36,5 +37,6 @@ const usuarioMiddleware = UsuarioMiddlware(colecao, provedorToken);
 const usuariosRegistrados = new UsuariosRegistrados(colecao);
 new UsuariosRegistradosController(app, usuariosRegistrados, usuarioMiddleware);
 
-const salvarTransacao = new SalvarTransacao();
+const ColecaoTransacao = new ColecaoTransacaoDB();
+const salvarTransacao = new SalvarTransacao(ColecaoTransacao);
 new SalvarTransacaoController(app, salvarTransacao, usuarioMiddleware);

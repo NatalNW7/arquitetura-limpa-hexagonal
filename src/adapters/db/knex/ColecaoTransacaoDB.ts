@@ -43,7 +43,9 @@ export default class ColecaoTransacaoDB implements ColecaoTransacao {
 
   private praTabela(transacao: Transacao): any {
     return {
-      ...transacao,
+      id: transacao.id,
+      descricao: transacao.descricao,
+      valor: transacao.valor,
       vencimento: transacao.vencimento.toISOString(),
       usuario_id: transacao.idUsuario,
     };
