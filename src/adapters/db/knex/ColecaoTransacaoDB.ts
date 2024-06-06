@@ -35,8 +35,12 @@ export default class ColecaoTransacaoDB implements ColecaoTransacao {
     const transacoes = await conexao
       .table("transacoes")
       .where("usuario_id", idUsuario)
-      .whereRaw("extract(ano from vencimento) = ?", ano)
-      .whereRaw("extract(mes from vencimento) = ?", mes);
+      .andWhere(conexao.raw("strftime('%Y', vencimento) = ?", [ano.toString()]))
+      .andWhere(
+        conexao.raw("strftime('%m', vencimento) = ?", [
+          mes.toString().padStart(2, "0"),
+        ])
+      );
 
     return transacoes.map(this.daTable);
   }

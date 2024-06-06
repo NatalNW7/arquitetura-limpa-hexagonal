@@ -23,3 +23,27 @@ test("Deve alterar uma transacao", async () => {
   );
   expect(res.status).toBe(200);
 });
+
+test("Deve salvar uma lista de transacoes", async () => {
+  const headers = await getAuthorizationHeader();
+  const respostas = transacoes.lista.map(async (transacao) => {
+    const res = await axios.post(`${baseUrl}/transacao`, transacao, headers);
+    return res.status;
+  });
+
+  const listaDeStatus = await Promise.all(respostas);
+  expect(listaDeStatus.every((status) => status === 200)).toBe(true);
+});
+
+test("Deve retornar o extrato mensal + saldo consolidado", async () => {
+  try {
+    const headers = await getAuthorizationHeader();
+    const res = await axios.get(`${baseUrl}/extrato/2021/01`, headers);
+    console.log(res.data);
+    expect(res.status).toBe(200);
+    expect(res.data).toHaveProperty("transacoes");
+    expect(res.data).toHaveProperty("saldo");
+  } catch (err: any) {
+    console.log(err.response.data);
+  }
+});

@@ -1,7 +1,7 @@
 import { Request, Response, Express } from "express";
 import SalvarTransacao from "../core/transacao/SalvarTransacao";
 
-export default class SlavartransacaoController {
+export default class SalvartransacaoController {
   constructor(
     private servidor: Express,
     private casoDeUso: SalvarTransacao,

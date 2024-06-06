@@ -12,6 +12,8 @@ import SalvarTransacao from "./core/transacao/SalvarTransacao";
 import SalvarTransacaoController from "./controllers/SalvarTransacaoController";
 import UsuarioMiddlware from "./controllers/UsuarioMiddlware";
 import ColecaoTransacaoDB from "./adapters/db/knex/ColecaoTransacaoDB";
+import ExtratoMensal from "./core/transacao/ExtratoMensal";
+import ExtratoMensalController from "./controllers/ExtratoMensalController";
 
 const app = express();
 app.use(express.json());
@@ -37,6 +39,9 @@ const usuarioMiddleware = UsuarioMiddlware(colecao, provedorToken);
 const usuariosRegistrados = new UsuariosRegistrados(colecao);
 new UsuariosRegistradosController(app, usuariosRegistrados, usuarioMiddleware);
 
-const ColecaoTransacao = new ColecaoTransacaoDB();
-const salvarTransacao = new SalvarTransacao(ColecaoTransacao);
+const colecaoTransacao = new ColecaoTransacaoDB();
+const salvarTransacao = new SalvarTransacao(colecaoTransacao);
 new SalvarTransacaoController(app, salvarTransacao, usuarioMiddleware);
+
+const extratoMensal = new ExtratoMensal(colecaoTransacao);
+new ExtratoMensalController(app, extratoMensal, usuarioMiddleware);
